@@ -1,0 +1,246 @@
+{
+  "template_mapping": {
+    "origin_context": {
+      "api_endpoint": "/character/4005-[id]/",
+      "fields": {
+        "creators": "creators",
+        "first_appearance": {
+          "issue": {
+            "name": "first_appearance_issue.name",
+            "issue_number": "first_appearance_issue.issue_number"
+          },
+          "date": "first_appearance_issue.cover_date"
+        },
+        "publisher": "publisher.name",
+        "real_name": "real_name",
+        "aliases": "aliases",
+        "birth": "birth",
+        "origin": {
+          "description": "origin.description",
+          "type": "origin.type"
+        }
+      },
+      "template_sections": [
+        "CRIAÇÃO",
+        "PRIMEIRA APARIÇÃO",
+        "CONCEITO ORIGINAL",
+        "IDENTIDADE",
+        "PODERES"
+      ]
+    },
+    "character_development": {
+      "api_endpoints": [
+        "/issues/?filter=character:[id]&sort=cover_date",
+        "/character/4005-[id]/issues"
+      ],
+      "fields": {
+        "key_issues": "issues",
+        "story_arcs": {
+          "filter": "has_story_arcs=true",
+          "fields": ["name", "description", "cover_date", "issues"]
+        },
+        "power_changes": {
+          "filter": "power_changes=true",
+          "extract_from": "description"
+        },
+        "deaths": {
+          "filter": "character_died=true",
+          "extract_from": "description"
+        }
+      },
+      "template_sections": [
+        "ARCO INICIAL",
+        "PRIMEIROS ANOS",
+        "MUDANÇAS SIGNIFICATIVAS",
+        "MOMENTOS MARCANTES",
+        "EVOLUÇÃO VISUAL",
+        "TRANSFORMAÇÃO",
+        "PERSONALIDADE"
+      ]
+    },
+    "thematic_analysis": {
+      "api_endpoints": [
+        "/issues/?filter=character:[id]",
+        "/character/4005-[id]/"
+      ],
+      "fields": {
+        "themes": {
+          "extract_from": "description",
+          "keywords": ["justice", "power", "identity", "responsibility", "sacrifice"]
+        },
+        "symbolism": {
+          "from_fields": ["real_name", "aliases", "powers", "description"]
+        },
+        "cultural_context": {
+          "from": "cover_date",
+          "analyze": "historical_period"
+        }
+      },
+      "template_sections": [
+        "TEMA PRINCIPAL",
+        "SIMBOLISMO",
+        "REPRESENTAÇÃO CULTURAL",
+        "CRÍTICA SOCIAL"
+      ]
+    },
+    "relations_universe": {
+      "api_endpoints": [
+        "/character/4005-[id]/",
+        "/issues/?filter=character:[id]",
+        "/story_arcs/?filter=character:[id]"
+      ],
+      "fields": {
+        "allies": "character_friends",
+        "enemies": "character_enemies",
+        "teams": "teams",
+        "story_arcs": "story_arcs",
+        "relationships": {
+          "extract_from": "description",
+          "keywords": ["friend", "enemy", "love", "mentor", "family"]
+        }
+      },
+      "template_sections": [
+        "ALIADOS PRINCIPAIS",
+        "VILÕES MARCANTES",
+        "TIMES E EQUIPES",
+        "STORY ARCS IMPORTANTES",
+        "RELAÇÕES ROMÂNTICAS"
+      ]
+    },
+    "adaptations": {
+      "external_sources": [
+        "IMDB_API",
+        "Games_database_API",
+        "TV_Tropes_API"
+      ],
+      "fields": {
+        "movies": {
+          "search": "{character_name} film adaptations",
+          "extract": ["title", "year", "actors", "director"]
+        },
+        "tv_shows": {
+          "search": "{character_name} TV series",
+          "extract": ["title", "years", "network", "cast"]
+        },
+        "video_games": {
+          "search": "{character_name} video games",
+          "extract": ["title", "platform", "year"]
+        }
+      },
+      "template_sections": [
+        "ADAPTAÇÕES CINEMA",
+        "ADAPTAÇÕES TV",
+        "GAMES",
+        "VERSÕES ALTERNATIVAS"
+      ]
+    },
+    "theories_curiosities": {
+      "sources": [
+        "Fan_wikis",
+        "Reddit_analysis",
+        "Reddit_databases",
+        "Interview_archives"
+      ],
+      "fields": {
+        "theories": {
+          "search": "{character_name} fan theories",
+          "extract": ["theory", "evidence", "popularity"]
+        },
+        "trivia": {
+          "search": "{character_name} trivia facts",
+          "extract": ["fact", "source", "verification"]
+        },
+        "easter_eggs": {
+          "search": "{character_name} easter eggs",
+          "extract": ["reference", "location", "issue"]
+        }
+      },
+      "template_sections": [
+        "TEORIAS POPULARES",
+        "CURIOSIDADES",
+        "EASTER EGGS",
+        "INFLUÊNCIA"
+      ]
+    }
+  },
+  "api_queries": {
+    "character_basic": {
+      "endpoint": "/character/4005-{character_id}/",
+      "params": {
+        "field_list": "id,name,aliases,real_name,birth,origin,publisher,creators,first_appearance_issue,description,character_friends,character_enemies,teams,powers,image"
+      }
+    },
+    "character_issues": {
+      "endpoint": "/issues/",
+      "params": {
+        "filter": "character:{character_id}",
+        "sort": "cover_date:asc",
+        "field_list": "id,name,issue_number,volume,cover_date,description,has_staff_review,character_died,character_credits"
+      }
+    },
+    "character_story_arcs": {
+      "endpoint": "/story_arcs/",
+      "params": {
+        "filter": "character:{character_id}",
+        "field_list": "id,name,description,deck,issues,first_appeared_in_issue,count_of_issues"
+      }
+    },
+    "character_volumes": {
+      "endpoint": "/volumes/",
+      "params": {
+        "filter": "character:{character_id}",
+        "field_list": "id,name,description,start_year,publisher,count_of_issues"
+      }
+    }
+  },
+  "research_checklist": {
+    "required_fields": {
+      "minimal": [
+        "character.id",
+        "character.name",
+        "character.first_appearance_issue",
+        "character.description"
+      ],
+      "basic": [
+        "character.creators",
+        "character.real_name",
+        "character.powers",
+        "character.origin"
+      ],
+      "complete": [
+        "character.character_friends",
+        "character.character_enemies",
+        "character.teams",
+        "issues.0-10",
+        "story_arcs.0-5"
+      ]
+    },
+    "quality_threshold": {
+      "character_score": 60,
+      "min_issues": 5,
+      "min_creators": 1,
+      "min_description_length": 100
+    }
+  },
+  "data_processing": {
+    "timeline_extraction": {
+      "from_fields": ["cover_date", "date_added", "date_last_updated"],
+      "sort_by": "cover_date"
+    },
+    "relationship_mapping": {
+      "allies": {
+        "from": "character_friends",
+        "priority": "frequency_appearance"
+      },
+      "enemies": {
+        "from": "character_enemies",
+        "priority": "story_importance"
+      }
+    },
+    "power_evolution": {
+      "extract_from": "description",
+      "keywords": ["powers", "abilities", "gained", "lost", "evolved"],
+      "track_changes": true
+    }
+  }
+}
