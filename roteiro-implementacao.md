@@ -1,4 +1,4 @@
-# Roteiro de Implementação: Sistema Automatizado de Vídeos sobre Quadrinhos
+ Roteiro de Implementação: Sistema Automatizado de Vídeos sobre Quadrinhos
 
 ## Visão Geral do Sistema
 
