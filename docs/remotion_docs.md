@@ -384,3 +384,128 @@ If the user is using the Node.js APIs:
 - A site can be deployed using `deploySite()`: https://www.remotion.dev/docs/lambda/deploysite
 - A video can be rendered using `renderMediaOnLambda()`: https://www.remotion.dev/docs/lambda/rendermediaonlambda.
 - If a video is rendered, the progress must be polled using `getRenderProgress()`: https://www.remotion.dev/docs/lambda/getrenderprogress
+
+## 📊 **VISÃO GERAL DA API**
+
+A **Comic Vine API** é uma das bases de dados mais completas sobre quadrinhos. Ela cobre:
+
+- **Marvel, DC, Image, Dark Horse, IDW** e centenas de outras editoras
+- **Personagens, edições, volumes, arcos, criadores, localizações, conceitos, objetos**
+- **Relações entre personagens** (amigos, inimigos, times)
+- **Histórico completo**: primeira aparição, mortes, ressurreições
+- **Metadados ricos**: imagens, descrições, cronologias
+
+---
+
+## 🔑 **ENDPOINTS ESSENCIAIS PARA SEU PROJETO**
+
+### **1. `/character` - O CORAÇÃO DO SEU SISTEMA**
+
+**Para que serve?** Pegar informações **COMPLETAS** de um personagem específico.
+
+**Campos que você vai AMAR (e usar em 90% dos vídeos):**
+
+| Campo | Descrição | Uso no Vídeo |
+| --- | --- | --- |
+| `name` | Nome do personagem | Título/Referências |
+| `real_name` | Nome real | Comparações comics vs filmes |
+| `aliases` | Apelidos (ex: "Spidey, Web-Head") | Curiosidades/Easter eggs |
+| `deck` | Resumo breve | Intro do vídeo |
+| `description` | Biografia COMPLETA (HTML) | Script base automatizado |
+| `powers` | Lista de poderes | Análises de poder |
+| `origin` | Origem (Human, Alien, Mutant, etc.) | Contexto narrativo |
+| `publisher` | Editora (Marvel, DC) | Comparações |
+| `creators` | **CRIADORES REAIS** (Stan Lee, etc.) | **Contexto dos criadores** (estilo Alt Shift X) |
+| `character_friends` | Lista de aliados | Relações/Dinâmicas |
+| `character_enemies` | Lista de inimigos | Conflitos/Arcos |
+| `teams` | Times (Avengers, Justice League) | Afiliações |
+| `first_appeared_in_issue` | **Primeira aparição** | História de publicação |
+| `count_of_issue_appearances` | Número de aparições | Relevância/Popularidade |
+| `issue_credits` | **TODAS as edições** | Cronologia completa |
+| `story_arc_credits` | Arcos narrativos | Análises profundas |
+| `movies` | Filmes relacionados | **Comparações comics vs filmes** |
+| `image` | Imagens oficiais | B-roll/Thumbnails |
+
+**Exemplo de uso:**
+
+```
+GET /character/1443/?api_key=YOUR_KEY&format=json&field_list=name,real_name,powers,creators,description,movies
+
+```
+
+**Resultado:** Dados do **Spider-Man** com TUDO que você precisa para o vídeo "Spider-Man Comics vs Movies".
+
+---
+
+### **2. `/issue` - DETALHES DE EDIÇÕES ESPECÍFICAS**
+
+**Para que serve?** Investigar **edições específicas** mencionadas no vídeo (ex: Amazing Spider-Man #121 - morte da Gwen Stacy).
+
+**Campos úteis:**
+
+- `character_credits`: Quem aparece
+- `characters_died_in`: Mortes importantes
+- `first_appearance_characters`: Estreias
+- `person_credits`: Escritores/Artistas (John Romita, etc.)
+- `story_arc_credits`: Parte de qual arco
+- `cover_date` vs `store_date`: Datas de publicação
+
+**Uso no vídeo:** "Na edição #121 de Amazing Spider-Man (1973), escrita por Gerry Conway e desenhada por Gil Kane, a morte de Gwen Stacy revolucionou os quadrinhos..."
+
+---
+
+### **3. `/characters` (plural) - BUSCA E COMPARAÇÕES**
+
+**Para que serve?** Buscar múltiplos personagens com **filtros**.
+
+**Filtros poderosos:**
+
+```
+filter=name:spider
+filter=publisher:10 (Marvel)
+filter=gender:Female
+
+```
+
+**Exemplo:** "Todos os personagens DC Absolute"
+
+```
+GET /characters/?api_key=YOUR_KEY&filter=name:absolute,publisher:DC&format=json
+
+```
+
+---
+
+### **4. `/story_arc` - ARCOS NARRATIVOS**
+
+**Para que serve?** Analisar **arcos completos** (Civil War, Knightfall, Infinity Gauntlet).
+
+**Campos:**
+
+- `description`: História completa do arco
+- `issue_credits`: Todas as edições envolvidas
+- `publisher`: Editora
+- `first_appeared_in_issue`: Início do arco
+
+**Uso:** "Durante o arco 'Clone Saga' (1994-1996), que envolveu 47 edições..."
+
+---
+
+### **5. `/concept` - CONCEITOS NARRATIVOS**
+
+**Para que serve?** Explicar **conceitos recorrentes** (Symbiotes, Multiverse, Phoenix Force).
+
+**Uso:** "O conceito de 'Spider-Verse' apareceu pela primeira vez em..."
+
+---
+
+### **6. `/movie` - ADAPTAÇÕES CINEMATOGRÁFICAS**
+
+**Para que serve?** Comparar **filmes com os quadrinhos**.
+
+**Campos:**
+
+- `characters`: Personagens do filme
+- `budget` / `box_office_revenue`: Contexto de produção
+- `description`: Sinopse
+- `rating`: Classificação
