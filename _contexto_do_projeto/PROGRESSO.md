@@ -38,17 +38,19 @@ Vídeo cru + minha narração → Vídeo final para upload
 #### **Arquivos de Suporte Disponíveis**:
 - `docs_support/comic-vine-api-complete-guide.md` - URLs completas da API
 - `_contexto_do_projeto/fase1_mapeamento_api.md` - Sistema de pontuação
-- `_contexto_do_projeto/sistema_potencial_conteudo.js` - Código base para implementar
+- `_contexto_do_projeto/sistema_potencial_conteudo.js` - Código base para adaptar aos nodes n8n
 - `_contexto_do_projeto/integracao_n8n_completa.md` - Workflow de 10 nodes
 
 #### **Tasks Pendentes**:
-- [ ] Implementar JavaScript analisadores (potencial, gaps, qualidade)
+- [ ] Implementar **nodes JavaScript n8n** (potencial, gaps, qualidade)
 - [ ] Configurar workflow n8n completo (10 nodes)
-- [ ] Setup Comic Vine API endpoints
+- [ ] Setup Comic Vine API endpoints nos nodes HTTP
 - [ ] Testar com 2-3 personagens (Spider-Man, Batman, Iron Man)
 - [ ] Validar output JSON para Remotion
 
-**Próximo passo**: Pesquisar LLM para implementar JavaScript analisadores
+**Importante**: O JavaScript será implementado **diretamente nos nodes n8n**, não como projeto Node.js separado. Cada função de análise será um node JavaScript específico no workflow.
+
+**Próximo passo**: ✅ CRIADO - Prompt para pesquisa LLM externa
 
 ---
 

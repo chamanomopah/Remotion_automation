@@ -28,8 +28,8 @@ Seu papel é guiar o processo de implementação do Sistema Inteligente de Víde
 Sempre comece perguntando: "Qual tarefa vamos focar agora?" ou "Qual prompt você precisa para a LLM externa?"
 
 ## ARQUIVOS CHAVE:
-- PROGRESSO.md: Acompanhamento
-- _contexto_do_projeto/: Documentação
+- C:\Users\Lofrey\Downloads\BCG\new\Remotion_automation\_contexto_do_projeto\PROGRESSO.md: Acompanhamento
+- C:\Users\Lofrey\Downloads\BCG\new\Remotion_automation\_contexto_do_projeto\PRD.md: Documentação
 - .claude/commands/guia-projeto.md: Este arquivo
 
 NUNCA implemente código ou execute comandos diretamente - seu papel é guiar o processo!

@@ -26,29 +26,31 @@ Sistema automatizado em 3 fases:
 ## 🏗️ **Arquitetura do Sistema**
 
 ### **FASE 1: Motor de Workflow n8n**
-**Responsabilidade**: Inteligência de conteúdo
+**Responsabilidade**: Inteligência de conteúdo implementada em **nodes JavaScript n8n**
 
 #### **Entradas**:
 - Nome do personagem (ex: "Spider-Man")
 - API Key Comic Vine
 - Opções de qualidade
 
-#### **Processo**:
-1. **Integração Comic Vine API**:
-   - `/search/` → Encontrar personagem
-   - `/character/4005-{id}/` → Detalhes completos
-   - `/issues/` → Quadrinhos do personagem
-   - `/story_arcs/` → Arcos narrativos
+#### **Processo (Implementado em nodes n8n)**:
+1. **Nodes HTTP Request** - Integração Comic Vine API:
+   - Node 1: `/search/` → Encontrar personagem
+   - Node 2: `/character/4005-{id}/` → Detalhes completos
+   - Node 3: `/issues/` → Quadrinhos do personagem
+   - Node 4: `/story_arcs/` → Arcos narrativos
 
-2. **Motor de Análise de Conteúdo**:
-   - Sistema de pontuação de potencial
-   - Cálculo de duração estimada
-   - Validação de assets visuais
+2. **Nodes JavaScript** - Motor de Análise de Conteúdo:
+   - Node 5: Sistema de pontuação de potencial
+   - Node 6: Cálculo de duração estimada
+   - Node 7: Validação de assets visuais
 
-3. **Geração de Storyboard**:
-   - Templates paramétricos de cenas
-   - Mapeamento info ↔ visual
-   - Geração de roteiro completo
+3. **Nodes JavaScript** - Geração de Storyboard:
+   - Node 8: Templates paramétricos de cenas
+   - Node 9: Mapeamento info ↔ visual
+   - Node 10: Geração de roteiro completo
+
+**Importante**: Toda a lógica JavaScript é implementada diretamente nos nodes n8n, não como projeto Node.js separado.
 
 #### **Saídas**:
 ```json
@@ -137,10 +139,10 @@ Sistema automatizado em 3 fases:
 - `docs_support/comicvine_api_docs.md` - Referência oficial da API
 - `_contexto_do_projeto/fase1_mapeamento_api.md` - Mapeamento de campos e pontuação
 
-**Código Base:**
-- `_contexto_do_projeto/sistema_potencial_conteudo.js` - Analisador de potencial (implementar)
-- `_contexto_do_projeto/sistema_analise_potencial.js` - Motor de análise (implementar)
-- `_contexto_do_projeto/checklist_qualidade_gap_detection.js` - Controle de qualidade (implementar)
+**Código Base (para adaptar aos nodes n8n):**
+- `_contexto_do_projeto/sistema_potencial_conteudo.js` - Analisador de potencial (adaptar para node n8n)
+- `_contexto_do_projeto/sistema_analise_potencial.js` - Motor de análise (adaptar para node n8n)
+- `_contexto_do_projeto/checklist_qualidade_gap_detection.js` - Controle de qualidade (adaptar para node n8n)
 - `_contexto_do_projeto/integracao_n8n_completa.md` - Workflow completo de 10 nodes
 
 ### **FASE 2 - Remotion + Claude Code**
